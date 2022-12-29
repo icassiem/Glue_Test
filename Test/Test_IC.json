@@ -1,0 +1,38 @@
+{
+  "name" : "Test_IC",
+  "description" : "Test Version Control",
+  "role" : "arn:aws:iam::977394867970:role/AWSGlueServiceRoleDefault",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://prod-demo-zxcv/sales/Test_IC.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-977394867970-eu-west-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-enable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-977394867970-eu-west-1/temporary/",
+    "--enable-auto-scaling" : "true"
+  },
+  "maxRetries" : 3,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://tracc-data-lake-analytics-dev/athena/rctest/e2b071b0-b19e-4978-a43e-4b37dcdd197f.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"S3 bucket\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"bucketed\",\"Type\":\"bigint\"},{\"Name\":\"client\",\"Type\":\"string\"},{\"Name\":\"startyear\",\"Type\":\"bigint\"},{\"Name\":\"startdate\",\"Type\":\"string\"},{\"Name\":\"pageviews\",\"Type\":\"bigint\"},{\"Name\":\"pagepath\",\"Type\":\"string\"},{\"Name\":\"traccs\",\"Type\":\"array<int>\"}]}],\"Paths\":[\"s3://tracc-data-lake-analytics-dev/athena/rctest/e2b071b0-b19e-4978-a43e-4b37dcdd197f.csv\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}},\"node-2\":{\"ApplyMapping\":{\"Inputs\":[\"node-1\"],\"Mapping\":[{\"Dropped\":false,\"FromPath\":[\"bucketed\"],\"FromType\":\"bigint\",\"ToKey\":\"bucketed\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"client\"],\"FromType\":\"string\",\"ToKey\":\"client\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"startyear\"],\"FromType\":\"bigint\",\"ToKey\":\"startyear\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"startdate\"],\"FromType\":\"string\",\"ToKey\":\"startdate\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"pageviews\"],\"FromType\":\"bigint\",\"ToKey\":\"pageviews\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"pagepath\"],\"FromType\":\"string\",\"ToKey\":\"pagepath\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"traccs\"],\"FromType\":\"array\",\"ToKey\":\"traccs\",\"ToType\":\"array\"}],\"Name\":\"ApplyMapping\"}},\"node-3\":{\"S3DirectTarget\":{\"Compression\":\"none\",\"Format\":\"json\",\"Inputs\":[\"node-2\"],\"Name\":\"S3 bucket\",\"PartitionKeys\":[],\"Path\":\"s3://prod-demo-zxcv/sales/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "Glue_Test",
+    "branch" : "Test",
+    "folder" : "Test"
+  }
+}
