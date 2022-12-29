@@ -1,0 +1,39 @@
+{
+  "name" : "test2",
+  "description" : "",
+  "role" : "arn:aws:iam::977394867970:role/AWSGlueServiceRoleDefault",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-977394867970-eu-west-1/scripts/test2.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-977394867970-eu-west-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-enable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-977394867970-eu-west-1/temporary/"
+  },
+  "maxRetries" : 3,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1\":{\"S3ParquetSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://prod-athena-results-zxcv/analytics/00004f6c-a4a6-4e6f-9a7d-89131fdabf8c.csv\"},\"Exclusions\":[],\"Name\":\"S3 bucket\",\"OutputSchemas\":[{\"Columns\":[]}],\"Paths\":[\"s3://prod-athena-results-zxcv\"],\"Recurse\":true}},\"node-2\":{\"ApplyMapping\":{\"Inputs\":[\"node-1\"],\"Mapping\":[],\"Name\":\"ApplyMapping\"}},\"node-3\":{\"S3CatalogTarget\":{\"Database\":\"datalake\",\"Inputs\":[\"node-2\"],\"Name\":\"Data Catalog table\",\"PartitionKeys\":[],\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false},\"Table\":\"analyst_assessment_demo\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "Glue_Test",
+    "branch" : "Test",
+    "folder" : "test2"
+  }
+}
